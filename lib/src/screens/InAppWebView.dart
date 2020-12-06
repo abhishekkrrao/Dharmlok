@@ -40,7 +40,9 @@ class _InAppWebViewState extends State<InAppWebViewPage> {
             child: Column(children: <Widget>[
               Container(
                   padding: EdgeInsets.all(10.0),
-                  child: progress < 1.0 ? CircularProgressIndicator() :  Container()
+                  child: progress < 1.0 ? CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Color(int.parse("0xFF003975"))),
+                  ) :  Container()
             // child: progress < 1.0 ? LinearProgressIndicator(value: progress) : Container()
               ),
 

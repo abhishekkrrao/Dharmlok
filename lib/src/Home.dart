@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title,
-          style: TextStyle(fontFamily: 'Montserrat-Medium', fontSize: 14, fontWeight: FontWeight.w700,),
+          style: TextStyle(fontFamily: 'Montserrat-Medium', fontSize: 18, fontWeight: FontWeight.w700,),
         ),
       ),
       body:  Column(
