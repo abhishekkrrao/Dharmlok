@@ -2,15 +2,13 @@ import 'package:dharmlok/src/screens/DialogPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class SlderCell extends StatelessWidget {
-  const SlderCell(this.image);
+  SlderCell(this.image);
   @required
   final String image;
-
   @override
   Widget build(BuildContext context) {
     return new Container(
       width: double.infinity,
-
       child: GestureDetector(
         onTap: (){   Navigator.of(context).push(PageRouteBuilder(
             opaque: false,

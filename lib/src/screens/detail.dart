@@ -37,6 +37,7 @@ class GridDetailsState extends State<GridDetail> {
         shrinkWrap: true,
         children: [
           Container(
+
               alignment: Alignment.topLeft,
               margin: EdgeInsets.all(5.0),
               child: SizedBox(
@@ -59,27 +60,78 @@ class GridDetailsState extends State<GridDetail> {
                           image: AssetImage(widget.model.thumbnailUrl),
                         ),
                       ),
-
-                      Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: Text(
-                          widget.model.name,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: 'Montserrat-Medium',
+                      SizedBox(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: EdgeInsets.only(left:15,top: 15),
+                          child: Text(
+                            "Visit At",
+                            textAlign: TextAlign.left,
+                            style:  TextStyle(
+                              color: Color(int.parse("0xFF003975")),
+                              fontFamily: 'Montserrat-Medium',
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ),
+                      Padding(
+                        padding: EdgeInsets.all(15.0),
+                        child: InkWell(
+                            child: new Text(widget.model.web,style:
+                              TextStyle(
+                                  color: Color(int.parse("0xFF003975")),
+                                fontFamily: 'Montserrat-Medium',
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            onTap: () => {
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                            builder: (BuildContext context) => InAppWebViewPage(widget.model)))
+                            }
+                        ),
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: EdgeInsets.only(left:15),
+                          child: Text(
+                            widget.model.name,
+                            textAlign: TextAlign.left,
+                            style:  TextStyle(
+                              color: Color(int.parse("0xFF003975")),
+                              fontFamily: 'Montserrat-Medium',
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      // Padding(
+                      //   padding: EdgeInsets.all(5.0),
+                      //   child: Text(
+                      //     widget.model.name,
+                      //     style: TextStyle(
+                      //       fontSize: 16,
+                      //       fontWeight: FontWeight.w700,
+                      //       fontFamily: 'Montserrat-Medium',
+                      //     ),
+                      //   ),
+                      // ),
                       Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Text(
                           widget.model.desc,
                           style: TextStyle(
                             fontFamily: 'Montserrat-Medium',
-                            fontSize: 11,
+                            fontSize: 13,
                             fontWeight: FontWeight.w300,
-                            wordSpacing: 2.0,
+                            wordSpacing: 3.0,
+                            letterSpacing: 0.5,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -91,24 +143,24 @@ class GridDetailsState extends State<GridDetail> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) => InAppWebViewPage(widget.model)));
-        },
-        child: IconButton(
-          onPressed: ()=>{
-          Navigator.push(
-          context,
-          MaterialPageRoute(
-          builder: (BuildContext context) => InAppWebViewPage(widget.model)))
-          },
-          icon:Icon(Icons.web),
-        ),
-        backgroundColor: Color(int.parse("0xFF003975")),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: (){
+      //     Navigator.push(
+      //         context,
+      //         MaterialPageRoute(
+      //             builder: (BuildContext context) => InAppWebViewPage(widget.model)));
+      //   },
+      //   child: IconButton(
+      //     onPressed: ()=>{
+      //     Navigator.push(
+      //     context,
+      //     MaterialPageRoute(
+      //     builder: (BuildContext context) => InAppWebViewPage(widget.model)))
+      //     },
+      //     icon:Icon(Icons.web),
+      //   ),
+      //   backgroundColor: Color(int.parse("0xFF003975")),
+      // ),
     );
   }
 

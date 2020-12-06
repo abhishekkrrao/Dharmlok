@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
       children: <Widget>[
         CarouselSlider(
           options: CarouselOptions(
-              height: 180.0,
+              height: 160.0,
               aspectRatio: 16 / 9,
               viewportFraction: 1.1,
               initialPage: 0,
