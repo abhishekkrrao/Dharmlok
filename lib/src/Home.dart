@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:math';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dharmlok/model/SingleItem.dart';
 import 'package:dharmlok/model/model.dart';
@@ -68,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-  int _current = 0;
+  double _current = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,24 +94,40 @@ class _MyHomePageState extends State<MyHomePage> {
               autoPlayCurve: Curves.fastOutSlowIn,
               enlargeCenterPage: true,
               onPageChanged: (pos, op) {
-                _current = pos;
+                _current = pos.toDouble();
+                setState(() {
+                  _current = pos.toDouble();
+                });
                 print("${_current}");
               }),
           items: getPageList(imageList),
         ),
         Container(
           width: double.infinity,
-          child: Card(
-            color: Colors.indigo,
-            margin: EdgeInsets.all(2.0),
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Text("Dharmlok App",
-                style: TextStyle(fontFamily: 'Montserrat-Medium',
-                  fontSize: 16, fontWeight: FontWeight.bold,color: Colors.white,),),
+          child: DotsIndicator(
+            dotsCount: imageList.length,
+            position: _current,
+            decorator: DotsDecorator(
+              activeColor: Color(int.parse("0xFF003975")),
+              size: const Size.square(9.0),
+              activeSize: const Size(18.0, 9.0),
+              activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
             ),
           ),
         ),
+        // Container(
+        //   width: double.infinity,
+        //   child: Card(
+        //     color: Colors.indigo,
+        //     margin: EdgeInsets.all(2.0),
+        //     child: Padding(
+        //       padding: EdgeInsets.all(20),
+        //       child: Text("Dharmlok App",
+        //         style: TextStyle(fontFamily: 'Montserrat-Medium',
+        //           fontSize: 16, fontWeight: FontWeight.bold,color: Colors.white,),),
+        //     ),
+        //   ),
+        // ),
         Flexible(
           child: FutureBuilder<List<Model>>(
             future: Services.getJson(),

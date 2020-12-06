@@ -1,7 +1,7 @@
 import 'package:dharmlok/model/model.dart';
+import 'package:dharmlok/src/screens/DialogPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-
 import 'InAppWebView.dart';
 // ignore: must_be_immutable
 class GridDetail extends StatefulWidget {
@@ -47,10 +47,19 @@ class GridDetailsState extends State<GridDetail> {
                   child: new Column(
 
                     children: <Widget>[
-                      Image(
-                        width: double.infinity,
-                        image: AssetImage(widget.model.thumbnailUrl),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.of(context).push(PageRouteBuilder(
+                              opaque: false,
+                              pageBuilder: (BuildContext context, _, __) =>
+                                  DialogPage(widget.model.thumbnailUrl)));
+                        },
+                        child: Image(
+                          width: double.infinity,
+                          image: AssetImage(widget.model.thumbnailUrl),
+                        ),
                       ),
+
                       Padding(
                         padding: EdgeInsets.all(15.0),
                         child: Text(
@@ -96,11 +105,15 @@ class GridDetailsState extends State<GridDetail> {
           MaterialPageRoute(
           builder: (BuildContext context) => InAppWebViewPage(widget.model)))
           },
-          icon:Icon(Icons.arrow_forward_ios),
-
+          icon:Icon(Icons.web),
         ),
         backgroundColor: Color(int.parse("0xFF003975")),
       ),
     );
   }
+
+  Widget showDialog(){
+
+  }
+
 }
