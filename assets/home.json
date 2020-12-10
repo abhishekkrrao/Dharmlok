@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Home",
+    "photo": "assets/om/om.jpg",
+    "webUrl": "https://www.dharmlok.com/"
+  },
+  {
+    "name": "Dharmguru",
+    "photo": "assets/om/om1.jpg",
+    "webUrl": "https://www.dharmlok.com/dharmguru?guru=Sanatan&id=58e83dd9c5"
+  },
+  {
+    "name": "Kathavachak",
+    "photo": "assets/kathavachak/h.jpg",
+    "webUrl": "https://www.dharmlok.com/kathavachak?guru=Sanatan&id=58e83dd9c5"
+  },
+  {
+    "name": "Events & Booking",
+    "photo": "assets/om/om3.jpg",
+    "webUrl": "https://www.dharmlok.com/events"
+  },
+  {
+    "name": "Temple",
+    "photo": "assets/om/om.jpg",
+    "webUrl": "https://www.dharmlok.com/temple?guru=Sanatan&id=58e83dd9c5"
+  },
+  {
+    "name": "E-Shop",
+    "photo": "assets/shop/4.jpg",
+    "webUrl": "https://www.dharmlok.com/shop"
+  },
+  {
+    "name": "Library",
+    "photo": "assets/om/om.jpg",
+    "webUrl": "https://www.dharmlok.com/audio-player"
+  },
+  {
+    "name": "Travel",
+    "photo": "assets/yatra.png",
+    "webUrl": "https://dharmlok.in/home"
+  }
+]

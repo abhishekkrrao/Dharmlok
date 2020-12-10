@@ -3,53 +3,58 @@ import 'package:dharmlok/src/screens/DialogPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'InAppWebView.dart';
+
 // ignore: must_be_immutable
 class GridDetail extends StatefulWidget {
   GridDetail(this.model);
+
   @required
   Model model;
+
   @override
   GridDetailsState createState() => GridDetailsState();
 }
+
 class GridDetailsState extends State<GridDetail> {
   InAppWebViewController webView;
   String url = "";
   double progress = 0;
+
   @override
   void initState() {
     super.initState();
   }
+
   @override
   void dispose() {
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            widget.model.name,
-            style: TextStyle(
-              fontSize: 13.0,
-            ),
-          )),
+        widget.model.name,
+        style: TextStyle(
+          fontSize: 13.0,
+        ),
+      )),
       body: new ListView(
         shrinkWrap: true,
         children: [
           Container(
-
               alignment: Alignment.topLeft,
               margin: EdgeInsets.all(5.0),
               child: SizedBox(
-
                 width: double.infinity,
                 child: Card(
-
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0)),
                   child: new Column(
-
                     children: <Widget>[
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.of(context).push(PageRouteBuilder(
                               opaque: false,
                               pageBuilder: (BuildContext context, _, __) =>
@@ -63,11 +68,11 @@ class GridDetailsState extends State<GridDetail> {
                       SizedBox(
                         width: double.infinity,
                         child: Padding(
-                          padding: EdgeInsets.only(left:15,top: 15),
+                          padding: EdgeInsets.only(left: 15, top: 15),
                           child: Text(
                             "Visit At",
                             textAlign: TextAlign.left,
-                            style:  TextStyle(
+                            style: TextStyle(
                               color: Color(int.parse("0xFF003975")),
                               fontFamily: 'Montserrat-Medium',
                               fontSize: 17,
@@ -79,30 +84,31 @@ class GridDetailsState extends State<GridDetail> {
                       Padding(
                         padding: EdgeInsets.all(15.0),
                         child: InkWell(
-                            child: new Text(widget.model.web,style:
-                              TextStyle(
-                                  color: Color(int.parse("0xFF003975")),
+                            child: new Text(
+                              widget.model.web,
+                              style: TextStyle(
+                                color: Color(int.parse("0xFF003975")),
                                 fontFamily: 'Montserrat-Medium',
                                 fontSize: 11,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
                             onTap: () => {
-                            Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                            builder: (BuildContext context) => InAppWebViewPage(widget.model)))
-                            }
-                        ),
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              InAppWebViewPage(widget.model.thumbnailUrl,widget.model.name)))
+                                }),
                       ),
                       SizedBox(
                         width: double.infinity,
                         child: Padding(
-                          padding: EdgeInsets.only(left:15),
+                          padding: EdgeInsets.only(left: 15),
                           child: Text(
                             widget.model.name,
                             textAlign: TextAlign.left,
-                            style:  TextStyle(
+                            style: TextStyle(
                               color: Color(int.parse("0xFF003975")),
                               fontFamily: 'Montserrat-Medium',
                               fontSize: 17,
@@ -139,8 +145,7 @@ class GridDetailsState extends State<GridDetail> {
                     ],
                   ),
                 ),
-              )
-          ),
+              )),
         ],
       ),
       // floatingActionButton: FloatingActionButton(
@@ -164,8 +169,5 @@ class GridDetailsState extends State<GridDetail> {
     );
   }
 
-  Widget showDialog(){
-
-  }
-
+  Widget showDialog() {}
 }

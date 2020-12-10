@@ -1,16 +1,21 @@
 import 'package:dharmlok/model/model.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' show Vector3;
+
 class DialogPage extends StatefulWidget {
   DialogPage(this.thumbnailUrl);
+
   @required
   String thumbnailUrl;
+
   @override
   DialogPageState createState() => DialogPageState();
 }
+
 class DialogPageState extends State<DialogPage> {
   double _scale = 1.0;
   double _previousScale = 1.0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,28 +35,33 @@ class DialogPageState extends State<DialogPage> {
           )
         ],
       ),
-      backgroundColor: Colors.white.withOpacity(0.85), // this is the main reason of transparency at next screen. I am ignoring rest implementation but what i have achieved is you can see.
+      backgroundColor: Colors.white.withOpacity(0.85),
+      // this is the main reason of transparency at next screen. I am ignoring rest implementation but what i have achieved is you can see.
       body: Container(
-        child:  Center(
-          child:  GestureDetector(
-            onTap: (){
-
-            },
+        child: Center(
+          child: GestureDetector(
+            onTap: () {},
             onScaleStart: (ScaleStartDetails details) {
               print(details);
               _previousScale = _scale;
-              setState(() {_previousScale = _scale;});
+              setState(() {
+                _previousScale = _scale;
+              });
             },
             onScaleUpdate: (ScaleUpdateDetails details) {
               print(details);
               _scale = _previousScale * details.scale;
-              setState(() {  _scale = _previousScale * details.scale;});
+              setState(() {
+                _scale = _previousScale * details.scale;
+              });
             },
             onScaleEnd: (ScaleEndDetails details) {
               print(details);
 
               _previousScale = 1.0;
-              setState(() {_previousScale = 1.0;});
+              setState(() {
+                _previousScale = 1.0;
+              });
             },
             child: RotatedBox(
               quarterTurns: 0,
@@ -68,30 +78,30 @@ class DialogPageState extends State<DialogPage> {
             ),
           ),
         ),
-          // child: SizedBox(
-          //   height: imageSize,
-          //   child:  GestureDetector(
-          //     onScaleUpdate: (details) {
-          //       setState(() {
-          //         imageSize = initimageSize + (initimageSize * (details.scale * .35));
-          //       });
-          //     },
-          //     onScaleEnd: (ScaleEndDetails details) {
-          //       setState(() {
-          //         initimageSize = imageSize;
-          //       });
-          //     },
-          //     onTap: (){
-          //        Navigator.pop(context);
-          //     },
-          //     child: Image(
-          //       height: double.infinity,
-          //       width: double.infinity,
-          //       image: AssetImage(widget.model.thumbnailUrl),
-          //     ),
-          //   ),
-          // ),
-        ),
+        // child: SizedBox(
+        //   height: imageSize,
+        //   child:  GestureDetector(
+        //     onScaleUpdate: (details) {
+        //       setState(() {
+        //         imageSize = initimageSize + (initimageSize * (details.scale * .35));
+        //       });
+        //     },
+        //     onScaleEnd: (ScaleEndDetails details) {
+        //       setState(() {
+        //         initimageSize = imageSize;
+        //       });
+        //     },
+        //     onTap: (){
+        //        Navigator.pop(context);
+        //     },
+        //     child: Image(
+        //       height: double.infinity,
+        //       width: double.infinity,
+        //       image: AssetImage(widget.model.thumbnailUrl),
+        //     ),
+        //   ),
+        // ),
+      ),
     );
   }
 }
