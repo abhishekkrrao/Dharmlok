@@ -2,7 +2,9 @@ import 'dart:async';
 import 'package:dharmlok/model/HomeModel.dart';
 import 'package:dharmlok/model/panchang.dart';
 import 'package:dharmlok/src/screens/DialogPage.dart';
+import 'package:dharmlok/src/screens/Events.dart';
 import 'package:dharmlok/src/screens/InAppWebView.dart';
+import 'package:dharmlok/src/screens/dharmguru.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dharmlok/model/SingleItem.dart';
@@ -67,21 +69,28 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    initValue();
+
+    initPanchang().then((value) => {setState(() {parrayList = value;})});
+    initHomeModel().then((value) => {setState(() {harrayList = value;})});
+    initModelValue().then((value) => {setState(() {arrayList = value;})});
   }
 
-  void initValue() async {
-    Future<List<Model>> list = Services.getJson();
-    arrayList = await list;
-
+  Future<List<Panchang>> initPanchang() async {
     Future<List<Panchang>> plist = Services.getPanchangJson();
     parrayList = await plist;
+    return plist;
+  }
 
-
+  Future<List<HomeModel>> initHomeModel() async {
     Future<List<HomeModel>> hlist = Services.getHomeJson();
     harrayList = await hlist;
+    return hlist;
+  }
 
-
+  Future<List<Model>> initModelValue() async {
+    Future<List<Model>> list = Services.getJson();
+    arrayList = await list;
+    return list;
   }
 
   goToDetailsPage(BuildContext context, Model album) {
@@ -167,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemBuilder: (context, index) {
                   if (harrayList[index] != null) {
                     return singleView(harrayList[index].thumbnailUrl,
-                        harrayList[index].name, harrayList[index].web);
+                        harrayList[index].name, harrayList[index].web, index);
                   }
                   return CircularProgressIndicator();
                 },
@@ -199,7 +208,6 @@ class _MyHomePageState extends State<MyHomePage> {
               childCount: arrayList.length,
             ),
           ),
-
           SliverToBoxAdapter(
             child: Container(
               child: Padding(
@@ -214,7 +222,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-
           SliverToBoxAdapter(
             child: SizedBox(
               height: 130.0,
@@ -223,13 +230,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   if (parrayList[index] != null) {
-                    return panchangSingleView(parrayList[index].thumbnailUrl,parrayList[index].web,parrayList[index].name);
+                    return panchangSingleView(parrayList[index].thumbnailUrl,
+                        parrayList[index].web, parrayList[index].name);
                   }
                   return CircularProgressIndicator();
                 },
                 itemCount: parrayList == null ||
-                    (parrayList.length == null ||
-                        parrayList.length == 0)
+                        (parrayList.length == null || parrayList.length == 0)
                     ? 0
                     : parrayList.length,
               ),
@@ -319,7 +326,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
+        onPressed: () {
           onClick("https://www.dharmlok.com/live-darshan", "LIVE DARSHAN");
         },
         backgroundColor: Color(int.parse("0xFFe03430")),
@@ -327,14 +334,20 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Icon(Icons.live_tv,size: 13,),
+            Icon(
+              Icons.live_tv,
+              size: 13,
+            ),
             Padding(
               padding: EdgeInsets.only(left: 2),
-              child: Text("Live",style: TextStyle(fontSize: 11),),
+              child: Text(
+                "Live",
+                style: TextStyle(fontSize: 11),
+              ),
             )
           ],
         ),
-      ),// This trailing comma makes auto-formatting nicer for build methods.
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
@@ -342,22 +355,39 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (BuildContext context) =>
-                InAppWebViewPage(webUrl, name)));
+            builder: (BuildContext context) => InAppWebViewPage(webUrl, name)));
   }
 
-  Widget singleView(String thumbnailUrl, String name, String webUrl) {
+  Widget singleView(
+      String thumbnailUrl, String name, String webUrl, int position) {
     print(thumbnailUrl);
     return SizedBox(
         width: 140,
         height: 96,
         child: GestureDetector(
           onTap: () {
-            onClick(webUrl, name);
-            // Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (BuildContext context) => Dharmguru()));
+            // onClick(webUrl, name);
+            if (position == 0 || position == 4 || position == 2) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => Dharmguru(name)));
+            } else if (position == 1) {
+              onClick(webUrl, name);
+            } else if (position == 3) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => Event(name)));
+            } else if (position == 5) {
+              onClick(webUrl, name);
+            } else if (position == 6) {
+              onClick(webUrl, name);
+            } else if (position == 7) {
+              onClick(webUrl, name);
+            } else if (position == 8) {
+              onClick(webUrl, name);
+            }
           },
           child: Card(
             shape: RoundedRectangleBorder(
@@ -378,12 +408,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Padding(
-                    padding: EdgeInsets.only(left: 0, top: 5),
+                    padding: EdgeInsets.only(left: 0, top: 8),
                     child: Text(
                       name,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontSize: 11, fontFamily: 'Montserrat-Medium'),
+                          fontSize: 13, fontFamily: 'Montserrat-Medium',fontWeight: FontWeight.bold),
                     ))
               ],
             ),
@@ -444,8 +474,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-
-  Widget panchangSingleView(String thumbnailUrl,String WelUrl,String name) {
+  Widget panchangSingleView(String thumbnailUrl, String WelUrl, String name) {
     return SizedBox(
       width: 140,
       height: 96,
@@ -459,7 +488,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onClick(WelUrl, name);
             },
             child: Image.network(
-                thumbnailUrl,
+              thumbnailUrl,
               width: 66.0,
               height: 66.0,
             ),
@@ -468,5 +497,4 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
 }

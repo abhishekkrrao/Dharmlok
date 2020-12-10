@@ -1,0 +1,17 @@
+[
+  {
+    "web": "https://www.dharmlok.com/events",
+    "name": "Events",
+    "image": "assets/event.jpg"
+  },
+  {
+    "web": "https://www.dharmlok.com/pandit",
+    "name": "Book Pandit",
+    "image": "assets/pandit.jpg"
+  },
+  {
+    "web": "https://www.dharmlok.com/puja",
+    "name": "Book Puja",
+    "image": "assets/chhath.jpg"
+  }
+]

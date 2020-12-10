@@ -50,6 +50,7 @@ flutter:
     - assets/dharmlok.json
     - assets/panchang.json
     - assets/home.json
+    - assets/events.json
     - assets/images/no_image.png
     - assets/slider/1.jpg
     - assets/slider/2.jpg
@@ -59,6 +60,9 @@ flutter:
     - assets/om/
     - assets/shop/
     - assets/kathavachak/
+    - event.jpg
+    - chhath.jpg
+    - pandit.jpg
     - 1.png
     - 2.png
     - 3.png

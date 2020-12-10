@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:dharmlok/model/EventModel.dart';
 import 'package:dharmlok/model/HomeModel.dart';
 import 'package:dharmlok/model/model.dart';
 import 'package:dharmlok/model/panchang.dart';
@@ -36,6 +37,21 @@ class Services {
       throw Exception(e.toString());
     }
   }
+
+  static Future<List<EventModel>> getEventJson() async {
+    try {
+      final response = await rootBundle.loadString('assets/events.json');
+      List<EventModel> list = parseEventData(response);
+      return list;
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+  static List<EventModel> parseEventData(String responseBody) {
+    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+    return parsed.map<EventModel>((json) => EventModel.fromJson(json)).toList();
+  }
+
   static List<Panchang> parsePanchangData(String responseBody) {
     final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
     return parsed.map<Panchang>((json) => Panchang.fromJson(json)).toList();
